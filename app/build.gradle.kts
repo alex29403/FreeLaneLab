@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "de.alexin.freelanelab"
-        minSdk = 36
+        minSdk = 31
         targetSdk = 36
         versionCode = 1
         versionName = "0.1"
