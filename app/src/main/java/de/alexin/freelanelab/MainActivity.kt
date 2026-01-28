@@ -174,6 +174,12 @@ class MainActivity : ComponentActivity() {
                                         color = colorScheme.tertiary
                                     )
                                     Spacer(modifier = Modifier.height(10.dp))
+                                    Text(
+                                        text = "Special Thanks to Justin Smith!",
+                                        style = typography.bodySmall,
+                                        color = colorScheme.tertiary
+                                    )
+                                    Spacer(modifier = Modifier.height(10.dp))
                                     val packageInfo = packageManager.getPackageInfo(packageName, 0)
                                     val versionName = packageInfo.versionName
                                     Text(
