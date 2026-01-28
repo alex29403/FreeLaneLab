@@ -179,7 +179,7 @@ class MainActivity : ComponentActivity() {
                                     val packageInfo = packageManager.getPackageInfo(packageName, 0)
                                     val versionName = packageInfo.versionName
                                     Text(
-                                        text = "Free Lane Labs - Version 1.0",
+                                        text = "Free Lane Labs - Version 0.1",
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.tertiary,
                                     )
