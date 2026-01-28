@@ -185,7 +185,7 @@ class MainActivity : ComponentActivity() {
                                     )
                                     Spacer(modifier = Modifier.height(0.dp))
                                     Text(
-                                        text = "20.01.2025",
+                                        text = "28.01.2025",
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.tertiary
                                     )
