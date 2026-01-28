@@ -21,13 +21,13 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun OverlayUi(onClose: () -> Unit,
-              onCloseMode: (num: Int) -> Unit,
-              onLine:() -> Unit,
-              onCurve:() -> Unit,
-              onCircle:() -> Unit,
-              onDrawLine:() -> Unit,
-              onDrawCurve:() -> Unit,
-              onDrawCircle:() -> Unit,
+              onCloseMode: () -> Unit,
+              onLine: () -> Unit,
+              onCurve: () -> Unit,
+              onCircle: () -> Unit,
+              onDrawLine: () -> Unit,
+              onDrawCurve: () -> Unit,
+              onDrawCircle: () -> Unit,
               onMove: (dx: Int, dy: Int) -> Unit) {
     FreeLaneLabTheme {
         Row {
@@ -68,98 +68,103 @@ fun OverlayUi(onClose: () -> Unit,
                     tonalElevation = 8.dp
                 ) {
                     Row {
-                        if (mode == "Line") {
-                            IconButton(onClick = {
-                                onCloseMode(2)
-                                mode = "Menu"
-                            }) {
-                                Icon(
-                                    painter = painterResource(R.drawable.ic_close),
-                                    contentDescription = "close"
-                                )
+                        when (mode) {
+                            "Line" -> {
+                                IconButton(onClick = {
+                                    onCloseMode()
+                                    mode = "Menu"
+                                }) {
+                                    Icon(
+                                        painter = painterResource(R.drawable.ic_close),
+                                        contentDescription = "close"
+                                    )
+                                }
+                                IconButton(onClick = {
+                                    onDrawLine()
+                                    mode = "Menu"
+                                }) {
+                                    Icon(
+                                        painter = painterResource(R.drawable.ic_play),
+                                        contentDescription = "Draw Line"
+                                    )
+                                }
                             }
-                            IconButton(onClick = {
-                                onDrawLine()
-                                mode = "Menu"
-                            } ) {
-                                Icon(
-                                    painter = painterResource(R.drawable.ic_play),
-                                    contentDescription = "Draw Line"
-                                )
+                            "Curve" -> {
+                                IconButton(onClick = {
+                                    onCloseMode()
+                                    mode = "Menu"
+                                }) {
+                                    Icon(
+                                        painter = painterResource(R.drawable.ic_close),
+                                        contentDescription = "close"
+                                    )
+                                }
+                                IconButton(onClick = {
+                                    onDrawCurve()
+                                    mode = "Menu"
+                                }) {
+                                    Icon(
+                                        painter = painterResource(R.drawable.ic_play),
+                                        contentDescription = "Draw Curve"
+                                    )
+                                }
                             }
-                        } else if (mode == "Curve") {
-                            IconButton(onClick = {
-                                onCloseMode(3)
-                                mode = "Menu"
-                            }) {
-                                Icon(
-                                    painter = painterResource(R.drawable.ic_close),
-                                    contentDescription = "close"
-                                )
+                            "Circle" -> {
+                                IconButton(onClick = {
+                                    onCloseMode()
+                                    mode = "Menu"
+                                }) {
+                                    Icon(
+                                        painter = painterResource(R.drawable.ic_close),
+                                        contentDescription = "close"
+                                    )
+                                }
+                                IconButton(onClick = {
+                                    onDrawCircle()
+                                    mode = "Menu"
+                                }) {
+                                    Icon(
+                                        painter = painterResource(R.drawable.ic_play),
+                                        contentDescription = "Draw Circle"
+                                    )
+                                }
                             }
-                            IconButton(onClick = {
-                                onDrawCurve()
-                                mode = "Menu"
-                            }) {
-                                Icon(
-                                    painter = painterResource(R.drawable.ic_play),
-                                    contentDescription = "Draw Curve"
-                                )
-                            }
-                        } else if (mode == "Circle") {
-                            IconButton(onClick = {
-                                onCloseMode(3)
-                                mode = "Menu"
-                            }) {
-                                Icon(
-                                    painter = painterResource(R.drawable.ic_close),
-                                    contentDescription = "close"
-                                )
-                            }
-                            IconButton(onClick = {
-                                onDrawCircle()
-                                mode = "Menu"
-                            }) {
-                                Icon(
-                                    painter = painterResource(R.drawable.ic_play),
-                                    contentDescription = "Draw Circle"
-                                )
-                            }
-                        } else {
-                            IconButton(onClick = {
-                                onClose()
-                            }) {
-                                Icon(
-                                    painter = painterResource(R.drawable.ic_close_windows),
-                                    contentDescription = "close"
-                                )
-                            }
-                            IconButton(onClick = {
-                                onLine()
-                                mode = "Line"
-                            } ) {
-                                Icon(
-                                    painter = painterResource(R.drawable.ic_line),
-                                    contentDescription = "Draw Line"
-                                )
-                            }
-                            IconButton(onClick = {
-                                onCurve()
-                                mode = "Curve"
-                            } ) {
-                                Icon(
-                                    painter = painterResource(R.drawable.ic_curve),
-                                    contentDescription = "Draw Curve"
-                                )
-                            }
-                            IconButton(onClick = {
-                                onCircle()
-                                mode = "Circle"
-                            } ) {
-                                Icon(
-                                    painter = painterResource(R.drawable.ic_circle),
-                                    contentDescription = "Draw Circle"
-                                )
+                            else -> {
+                                IconButton(onClick = {
+                                    onClose()
+                                }) {
+                                    Icon(
+                                        painter = painterResource(R.drawable.ic_close_windows),
+                                        contentDescription = "close"
+                                    )
+                                }
+                                IconButton(onClick = {
+                                    onLine()
+                                    mode = "Line"
+                                }) {
+                                    Icon(
+                                        painter = painterResource(R.drawable.ic_line),
+                                        contentDescription = "Draw Line"
+                                    )
+                                }
+                                IconButton(onClick = {
+                                    onCurve()
+                                    mode = "Curve"
+                                }) {
+                                    Icon(
+                                        painter = painterResource(R.drawable.ic_curve),
+                                        contentDescription = "Draw Curve"
+                                    )
+                                }
+                                IconButton(onClick = {
+                                    onCircle()
+                                    mode = "Circle"
+                                }) {
+                                    Icon(
+                                        painter = painterResource(R.drawable.ic_circle),
+                                        contentDescription = "Draw Circle"
+                                    )
+                                }
                             }
                         }
                     }

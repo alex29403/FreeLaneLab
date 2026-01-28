@@ -36,6 +36,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.core.content.edit
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,7 +44,7 @@ fun Permissions(context: Context, notificationsEnabled: Boolean, overlayEnabled:
     val allEnabled = notificationsEnabled && overlayEnabled && accesibilityEnabled
     val permissionsDone = remember { mutableStateOf(false) }
 
-    BackHandler() {
+    BackHandler {
         onClose()
     }
         Scaffold(
@@ -410,7 +411,7 @@ fun Permissions(context: Context, notificationsEnabled: Boolean, overlayEnabled:
                                 enabled = allEnabled,
                                 onClick = {
                                     val prefs = context.getSharedPreferences("LaneLabsSpeicher", MODE_PRIVATE)
-                                    prefs.edit().putBoolean("confirmedSafety", true).apply()
+                                    prefs.edit { putBoolean("confirmedSafety", true) }
 
                                     onClose()
                                 },

@@ -12,12 +12,8 @@ import android.graphics.PixelFormat
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
-import android.util.Log
 import android.view.Gravity
-import android.view.View
 import android.view.WindowManager
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.ComposeView
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
@@ -162,7 +158,7 @@ class OverlayService :
                         }
                     },
                     onClose = { stopSelf() },
-                    onCloseMode = { num ->
+                    onCloseMode = {
                         hidePointWindows()
                     }
                 )

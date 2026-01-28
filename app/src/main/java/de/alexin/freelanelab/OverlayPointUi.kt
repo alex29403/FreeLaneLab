@@ -67,7 +67,7 @@ fun OverlayPointUi(label: String, lineStart: Boolean, onMove: (dx: Int, dy: Int)
                                 )
                             }
                         },
-                    contentAlignment = androidx.compose.ui.Alignment.Center
+                    contentAlignment = Alignment.Center
                 ) {
                     Text(text = label, color = MaterialTheme.colorScheme.onPrimary)
                 }

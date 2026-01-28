@@ -39,6 +39,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -53,16 +54,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.content.edit
 
 class MainActivity : ComponentActivity() {
 
     private val notificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-            if (isGranted) {
-                notificationsGranted.value = true
-            } else {
-                notificationsGranted.value = false
-            }
+            notificationsGranted.value = isGranted
         }
 
     private val notificationsGranted = mutableStateOf(false)
@@ -131,13 +129,13 @@ class MainActivity : ComponentActivity() {
                                     Text(
                                         text = resources.getString(R.string.info_title),
                                         style = typography.headlineMedium,
-                                        color = MaterialTheme.colorScheme.primary
+                                        color = colorScheme.primary
                                     )
                                     Spacer(modifier = Modifier.height(16.dp))
                                     Text(
                                         text = resources.getString(R.string.info_text),
                                         style = typography.bodyLarge,
-                                        color = MaterialTheme.colorScheme.secondary
+                                        color = colorScheme.secondary
                                     )
                                     Spacer(modifier = Modifier.height(16.dp))
                                     Row(
@@ -155,45 +153,45 @@ class MainActivity : ComponentActivity() {
                                             text = resources.getString(R.string.info_contact),
                                             fontWeight = FontWeight.Bold,
                                             fontSize = 20.sp,
-                                            color = MaterialTheme.colorScheme.onBackground
+                                            color = colorScheme.onBackground
                                         )
                                         Icon(
                                             painter = painterResource(R.drawable.ic_arrow),
                                             contentDescription = null,
-                                            tint = MaterialTheme.colorScheme.onBackground
+                                            tint = colorScheme.onBackground
                                         )
                                     }
                                     Spacer(modifier = Modifier.height(16.dp))
                                     Text(
                                         text = resources.getString(R.string.info_privacy) + " http://www.alexin.de/information/datenschutz.php",
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = MaterialTheme.colorScheme.tertiary
+                                        style = typography.bodySmall,
+                                        color = colorScheme.tertiary
                                     )
                                     Spacer(modifier = Modifier.height(0.dp))
                                     Text(
                                         text = resources.getString(R.string.info_imprint) + " http://www.alexin.de/information/impressum.php",
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = MaterialTheme.colorScheme.tertiary
+                                        style = typography.bodySmall,
+                                        color = colorScheme.tertiary
                                     )
                                     Spacer(modifier = Modifier.height(10.dp))
                                     val packageInfo = packageManager.getPackageInfo(packageName, 0)
                                     val versionName = packageInfo.versionName
                                     Text(
-                                        text = "Free Lane Labs - Version 0.1",
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = MaterialTheme.colorScheme.tertiary,
+                                        text = "Free Lane Labs - $versionName",
+                                        style = typography.bodySmall,
+                                        color = colorScheme.tertiary,
                                     )
                                     Spacer(modifier = Modifier.height(0.dp))
                                     Text(
                                         text = "28.01.2025",
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = MaterialTheme.colorScheme.tertiary
+                                        style = typography.bodySmall,
+                                        color = colorScheme.tertiary
                                     )
                                     Spacer(modifier = Modifier.height(0.dp))
                                     Text(
                                         text = "by Alexander Helminger - alexin.de",
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = MaterialTheme.colorScheme.tertiary
+                                        style = typography.bodySmall,
+                                        color = colorScheme.tertiary
                                     )
                                 }
                             }
@@ -225,8 +223,8 @@ class MainActivity : ComponentActivity() {
                         ) {
                             item {
                                 Text(
-                                    style = MaterialTheme.typography.displayMedium,
-                                    color = MaterialTheme.colorScheme.primary,
+                                    style = typography.displayMedium,
+                                    color = colorScheme.primary,
                                     text = context.getString(R.string.hello_title)
                                 )
                                 Spacer(modifier = Modifier.height(10.dp))
@@ -238,8 +236,8 @@ class MainActivity : ComponentActivity() {
                                 if (!enabled || !safety) {
                                     Text(
                                         modifier = Modifier.padding(horizontal = 20.dp),
-                                        style = MaterialTheme.typography.bodyMedium,
-                                        color = MaterialTheme.colorScheme.onSurface,
+                                        style = typography.bodyMedium,
+                                        color = colorScheme.onSurface,
                                         text = context.getString(R.string.hello_text_permissions),
                                         textAlign = TextAlign.Center
                                     )
@@ -250,8 +248,9 @@ class MainActivity : ComponentActivity() {
                                                 "LaneLabsSpeicher",
                                                 MODE_PRIVATE
                                             )
-                                            prefs.edit().putBoolean("confirmedSafety", false)
-                                                .apply()
+                                            prefs.edit {
+                                                putBoolean("confirmedSafety", false)
+                                            }
                                             permissions = true
                                         }
                                     ) {
@@ -261,8 +260,8 @@ class MainActivity : ComponentActivity() {
                                     if (!isRunning) {
                                         Text(
                                             modifier = Modifier.padding(horizontal = 20.dp),
-                                            style = MaterialTheme.typography.bodyMedium,
-                                            color = MaterialTheme.colorScheme.onSurface,
+                                            style = typography.bodyMedium,
+                                            color = colorScheme.onSurface,
                                             text = context.getString(R.string.hello_text),
                                             textAlign = TextAlign.Center
                                         )
@@ -282,8 +281,8 @@ class MainActivity : ComponentActivity() {
                                     } else {
                                         Text(
                                             modifier = Modifier.padding(horizontal = 20.dp),
-                                            style = MaterialTheme.typography.bodyMedium,
-                                            color = MaterialTheme.colorScheme.onSurface,
+                                            style = typography.bodyMedium,
+                                            color = colorScheme.onSurface,
                                             text = context.getString(R.string.hello_text_running),
                                             textAlign = TextAlign.Center
                                         )

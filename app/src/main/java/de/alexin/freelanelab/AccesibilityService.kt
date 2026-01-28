@@ -2,11 +2,11 @@ package de.alexin.freelanelab
 
 import android.accessibilityservice.AccessibilityService
 import android.accessibilityservice.GestureDescription
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.graphics.Path
 import android.graphics.RectF
 import android.provider.Settings
@@ -14,7 +14,6 @@ import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import kotlin.math.atan2
 import kotlin.math.hypot
-import kotlin.math.min
 
 const val EXTRA_DRAW_TYPE = "draw_type"
 
@@ -29,6 +28,7 @@ const val EXTRA_Y2 = "y2"
 const val EXTRA_X3 = "x3"
 const val EXTRA_Y3 = "y3"
 
+@SuppressLint("AccessibilityPolicy")
 class MyAccessibilityService : AccessibilityService() {
 
     companion object {
@@ -71,9 +71,9 @@ class MyAccessibilityService : AccessibilityService() {
     }
 
     fun drawCurve(x1: Float, y1: Float, x2: Float, y2: Float, x3: Float, y3: Float) {
-        val D = 2f * (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2))
+        val d = 2f * (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2))
 
-        if (D == 0f) {
+        if (d == 0f) {
             val path = Path().apply {
                 moveTo(x1, y1)
                 lineTo(x3, y3)
@@ -97,27 +97,26 @@ class MyAccessibilityService : AccessibilityService() {
                 (x1 * x1 + y1 * y1) * (y2 - y3) +
                         (x2 * x2 + y2 * y2) * (y3 - y1) +
                         (x3 * x3 + y3 * y3) * (y1 - y2)
-                ) / D
+                ) / d
 
         val cy = (
                 (x1 * x1 + y1 * y1) * (x3 - x2) +
                         (x2 * x2 + y2 * y2) * (x1 - x3) +
                         (x3 * x3 + y3 * y3) * (x2 - x1)
-                ) / D
+                ) / d
 
         val r = hypot(x1 - cx, y1 - cy)
 
         val rect = RectF(cx - r, cy - r, cx + r, cy + r)
 
-        var theta1 = Math.toDegrees(atan2((y1 - cy).toDouble(), (x1 - cx).toDouble())).toFloat()
+        val theta1 = Math.toDegrees(atan2((y1 - cy).toDouble(), (x1 - cx).toDouble())).toFloat()
         val theta2 = Math.toDegrees(atan2((y2 - cy).toDouble(), (x2 - cx).toDouble())).toFloat()
-        var theta3 = Math.toDegrees(atan2((y3 - cy).toDouble(), (x3 - cx).toDouble())).toFloat()
+        val theta3 = Math.toDegrees(atan2((y3 - cy).toDouble(), (x3 - cx).toDouble())).toFloat()
 
         var sweep = theta3 - theta1
 
-        val midAngle = theta2
-        if (!((sweep > 0 && midAngle in theta1..theta3) ||
-                    (sweep < 0 && midAngle in theta3..theta1))
+        if (!((sweep > 0 && theta2 in theta1..theta3) ||
+                    (sweep < 0 && theta2 in theta3..theta1))
         ) {
             sweep = if (sweep > 0) sweep - 360f else sweep + 360f
         }
@@ -141,9 +140,9 @@ class MyAccessibilityService : AccessibilityService() {
     }
 
     fun drawCircle(x1: Float, y1: Float, x2: Float, y2: Float, x3: Float, y3: Float) {
-        val D = 2f * (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2))
+        val d = 2f * (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2))
 
-        if (D == 0f) {
+        if (d == 0f) {
             val path = Path().apply {
                 moveTo(x1, y1)
                 lineTo(x3, y3)
@@ -167,13 +166,13 @@ class MyAccessibilityService : AccessibilityService() {
                 (x1 * x1 + y1 * y1) * (y2 - y3) +
                         (x2 * x2 + y2 * y2) * (y3 - y1) +
                         (x3 * x3 + y3 * y3) * (y1 - y2)
-                ) / D
+                ) / d
 
         val cy = (
                 (x1 * x1 + y1 * y1) * (x3 - x2) +
                         (x2 * x2 + y2 * y2) * (x1 - x3) +
                         (x3 * x3 + y3 * y3) * (x2 - x1)
-                ) / D
+                ) / d
 
         val r = hypot(x1 - cx, y1 - cy)
 
