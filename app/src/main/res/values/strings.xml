@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Free Lane Lab</string>
+
+    <string name="accessibility_description">
+This accessibility service allows the app to perform assisted touch gestures on behalf of the user to reduce repetitive actions.
+It only operates when explicitly activated by the user and does not collect or transmit any personal or sensitive data.
+</string>
+
+    <string name="notification_title">Overlay is active</string>
+    <string name="notification_text">You can close it from this notification</string>
+    <string name="notification_close">Close Overlay</string>
+
+    <string name="hello_title">Welcome!</string>
+    <string name="hello_text_permissions">To get started, please grant the app the necessary permissions and read the safety notices.</string>
+    <string name="hello_text_running">The Overlay is currently active. Close it by tapping the button below or via the notification. The Overlay is drawn over all other apps.</string>
+    <string name="hello_text">You’re all set! Start the Overlay by clicking the button below. After it appears, click the circle to expand it.</string>
+    <string name="hello_grant_permissions">Open Setup</string>
+
+    <string name="setup_title">App Setup</string>
+    <string name="permissions_text">These permissions are required for the app to function properly. They are only used for the purposes described below and nothing else.</string>
+    <string name="permissions_notifications_title">Notifications</string>
+    <string name="permissions_notifications_text">Notifications are needed to inform you if the app is running in the background.</string>
+    <string name="permissions_overlay_title">Overlay</string>
+    <string name="permissions_overlay_text">Allows the app to display its user interface on top of other apps.</string>
+    <string name="permissions_accessibility_title">Accessibility Service</string>
+    <string name="permissions_accessibility_text">This is used to simulate tap input as well as drag gestures on the touchscreen of your device.</string>
+    <string name="permissions_confirm">View security notices</string>
+    <string name="warnings_text">Please also read the following security notices before using the app</string>
+    <string name="warnings_gestures_title">System-Level Gestures</string>
+    <string name="warnings_gestures_text">Touch gestures are executed at the system level. This may trigger system navigation actions (such as Back, Home, or app switching) or interact with other apps while gestures are running.</string>
+    <string name="warnings_stop_title">Gestures Cannot Be Interrupted</string>
+    <string name="warnings_stop_text">Once a gesture has started, it cannot be stopped or canceled. The action will continue until it finishes, even if you leave the app or interact with the screen.</string>
+    <string name="warnings_apps_title">Affects Other Apps</string>
+    <string name="warnings_apps_text">Automated gestures may interact with other apps on your device. This can trigger actions outside this app and may have unintended consequences.</string>
+    <string name="warnings_confirm">Confirm</string>
+
+    <string name="info_title">About</string>
+    <string name="info_text">Free Lane Lab makes drawing roads in Freeways easier than ever.</string>
+    <string name="info_contact">Contact</string>
+    <string name="info_privacy">Privacy</string>
+    <string name="info_imprint">Imprint</string>
+</resources>
