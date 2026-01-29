@@ -15,8 +15,8 @@ android {
         applicationId = "de.alexin.freelanelab"
         minSdk = 31
         targetSdk = 36
-        versionCode = 1
-        versionName = "0.2"
+        versionCode = 3
+        versionName = "0.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

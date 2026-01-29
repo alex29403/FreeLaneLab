@@ -3,6 +3,7 @@ package de.alexin.freelanelab
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.compose.material3.Text
 import android.os.Bundle
 import android.provider.Settings
@@ -97,8 +98,12 @@ class MainActivity : ComponentActivity() {
                     Permissions(context, notificationsGranted.value, overlayGranted.value, accessibilityGranted.value, onClose = {
                         permissions = false
                     }, onRequestNotificationPermission = {
-                        if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                                notificationPermissionLauncher.launch(
+                                    Manifest.permission.POST_NOTIFICATIONS
+                                )
+                            }
                         }
                     }, onRequestOverlayPermission = {
                         if (!Settings.canDrawOverlays(context)) {
@@ -189,7 +194,7 @@ class MainActivity : ComponentActivity() {
                                     )
                                     Spacer(modifier = Modifier.height(0.dp))
                                     Text(
-                                        text = "28.01.2025",
+                                        text = "29.01.2025",
                                         style = typography.bodySmall,
                                         color = colorScheme.tertiary
                                     )
