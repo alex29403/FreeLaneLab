@@ -47,8 +47,11 @@ class MyAccessibilityService : AccessibilityService() {
         super.onDestroy()
     }
 
-    override fun onAccessibilityEvent(event: AccessibilityEvent?) {}
-    override fun onInterrupt() {}
+    override fun onAccessibilityEvent(event: AccessibilityEvent?) {
+    }
+
+    override fun onInterrupt() {
+    }
 
     fun drawLine(x1: Float, y1: Float, x2: Float, y2: Float) {
         val path = Path().apply {
@@ -125,10 +128,12 @@ class MyAccessibilityService : AccessibilityService() {
             addArc(rect, theta1, sweep)
         }
 
-        val distance = hypot(x3 - x1, y3 - y1)
+        val sweepRad = Math.toRadians(kotlin.math.abs(sweep.toDouble()))
+        val distance = r * sweepRad.toFloat()
 
-        // NOCH NICHT RICHTIG !!!
-        val duration = (distance / 1.0f).coerceIn(100f, 1000f).toLong()
+        val duration = (distance / 1.0f)
+            .coerceIn(100f, 1000f)
+            .toLong()
 
         dispatchGesture(
             GestureDescription.Builder()
