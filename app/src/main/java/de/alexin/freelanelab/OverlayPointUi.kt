@@ -25,13 +25,13 @@ fun OverlayPointUi(label: String, lineStart: Boolean, onMove: (dx: Int, dy: Int)
             if (!lineStart) {
                 Box(
                     modifier = Modifier
-                        .size(width = 2.dp, height = 10.dp)
+                        .size(width = 2.dp, height = 7.dp)
                         .background(MaterialTheme.colorScheme.surfaceTint.copy(alpha = 0.7f))
                 )
             } else {
                 Box(
                     modifier = Modifier
-                        .size(width = 2.dp, height = 10.dp)
+                        .size(width = 2.dp, height = 7.dp)
                         .background(Color.Green.copy(alpha = 0.7f))
                 )
             }
@@ -41,19 +41,19 @@ fun OverlayPointUi(label: String, lineStart: Boolean, onMove: (dx: Int, dy: Int)
                 if (!lineStart) {
                     Box(
                         modifier = Modifier
-                            .size(width = 10.dp, height = 2.dp)
+                            .size(width = 7.dp, height = 2.dp)
                             .background(MaterialTheme.colorScheme.surfaceTint.copy(alpha = 0.7f))
                     )
                 } else {
                     Box(
                         modifier = Modifier
-                            .size(width = 10.dp, height = 2.dp)
+                            .size(width = 7.dp, height = 2.dp)
                             .background(Color.Green.copy(alpha = 0.7f))
                     )
                 }
                 Box(
                     modifier = Modifier
-                        .size(25.dp)
+                        .size(26.dp)
                         .background(
                             color = MaterialTheme.colorScheme.surfaceTint.copy(alpha = 0.7f),
                             shape = CircleShape
@@ -74,13 +74,13 @@ fun OverlayPointUi(label: String, lineStart: Boolean, onMove: (dx: Int, dy: Int)
                 if (!lineStart) {
                     Box(
                         modifier = Modifier
-                            .size(width = 10.dp, height = 2.dp)
+                            .size(width = 7.dp, height = 2.dp)
                             .background(MaterialTheme.colorScheme.surfaceTint.copy(alpha = 0.7f))
                     )
                 } else {
                     Box(
                         modifier = Modifier
-                            .size(width = 10.dp, height = 2.dp)
+                            .size(width = 7.dp, height = 2.dp)
                             .background(Color.Green.copy(alpha = 0.7f))
                     )
                 }
@@ -88,13 +88,13 @@ fun OverlayPointUi(label: String, lineStart: Boolean, onMove: (dx: Int, dy: Int)
             if (!lineStart) {
                 Box(
                     modifier = Modifier
-                        .size(width = 2.dp, height = 10.dp)
+                        .size(width = 2.dp, height = 7.dp)
                         .background(MaterialTheme.colorScheme.surfaceTint.copy(alpha = 0.7f))
                 )
             } else {
                 Box(
                     modifier = Modifier
-                        .size(width = 2.dp, height = 10.dp)
+                        .size(width = 2.dp, height = 7.dp)
                         .background(Color.Green.copy(alpha = 0.7f))
                 )
             }

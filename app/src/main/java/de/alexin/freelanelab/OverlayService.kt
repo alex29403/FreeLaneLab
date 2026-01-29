@@ -1,5 +1,6 @@
 package de.alexin.freelanelab
 
+import android.Manifest
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -9,6 +10,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.PixelFormat
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
@@ -225,7 +227,7 @@ class OverlayService :
         val stopIntent = createStopPendingIntent()
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_brush)
+            .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(this.getString(R.string.notification_title))
             .setContentText(this.getString(R.string.notification_text))
             .setOngoing(true)
@@ -334,9 +336,9 @@ class OverlayService :
         updateLineState(movedPoint = pointView3)
     }
 
-    private val SNAP_THRESHOLD = 5
-
     private fun updateLineState(movedPoint: ComposeView?) {
+        val snapThreshold = 4
+
         if (movedPoint == null) return
 
         val points = listOf(pointView1, pointView2, pointView3)
@@ -352,11 +354,11 @@ class OverlayService :
             if (i == index) continue
             val otherLayout = layouts.getOrNull(i) ?: continue
 
-            if (kotlin.math.abs(newX - otherLayout.x) <= SNAP_THRESHOLD) {
+            if (kotlin.math.abs(newX - otherLayout.x) <= snapThreshold) {
                 newX = otherLayout.x
             }
 
-            if (kotlin.math.abs(newY - otherLayout.y) <= SNAP_THRESHOLD) {
+            if (kotlin.math.abs(newY - otherLayout.y) <= snapThreshold) {
                 newY = otherLayout.y
             }
         }
@@ -436,8 +438,12 @@ fun hasOverlayPermission(context: Context): Boolean {
 }
 
 fun hasNotificationPermission(context: Context): Boolean {
-    return ContextCompat.checkSelfPermission(
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        ContextCompat.checkSelfPermission(
             context,
-            android.Manifest.permission.POST_NOTIFICATIONS
+            Manifest.permission.POST_NOTIFICATIONS
         ) == PackageManager.PERMISSION_GRANTED
+    } else {
+        true
+    }
 }
