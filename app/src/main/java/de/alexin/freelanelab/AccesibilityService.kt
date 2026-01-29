@@ -76,7 +76,7 @@ class MyAccessibilityService : AccessibilityService() {
     fun drawCurve(x1: Float, y1: Float, x2: Float, y2: Float, x3: Float, y3: Float) {
         val d = 2f * (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2))
 
-        if (d == 0f) {
+        if (kotlin.math.abs(d) < 1e-4f) {
             val path = Path().apply {
                 moveTo(x1, y1)
                 lineTo(x3, y3)
@@ -147,7 +147,7 @@ class MyAccessibilityService : AccessibilityService() {
     fun drawCircle(x1: Float, y1: Float, x2: Float, y2: Float, x3: Float, y3: Float) {
         val d = 2f * (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2))
 
-        if (d == 0f) {
+        if (kotlin.math.abs(d) < 1e-4f) {
             val path = Path().apply {
                 moveTo(x1, y1)
                 lineTo(x3, y3)
