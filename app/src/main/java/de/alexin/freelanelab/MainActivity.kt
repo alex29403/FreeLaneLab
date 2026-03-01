@@ -1,12 +1,14 @@
 package de.alexin.freelanelab
 
 import android.Manifest
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.compose.material3.Text
 import android.os.Bundle
 import android.provider.Settings
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.Scaffold
@@ -25,7 +27,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -155,12 +156,18 @@ class MainActivity : ComponentActivity() {
                                         modifier = Modifier
                                             .clip(RoundedCornerShape(8.dp))
                                             .clickable {
-                                                val intent =
-                                                    Intent(Intent.ACTION_SENDTO).apply {
-                                                        data =
-                                                            "mailto:support@alexin.de".toUri()
-                                                    }
-                                                context.startActivity(intent)
+                                                val intent = Intent(Intent.ACTION_SENDTO).apply {
+                                                    data = "mailto:support@alexin.de".toUri()
+                                                }
+                                                try {
+                                                    context.startActivity(intent)
+                                                } catch (e: ActivityNotFoundException) {
+                                                    Toast.makeText(
+                                                        context,
+                                                        resources.getString(R.string.info_contact_failed),
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                }
                                             }
                                     ) {
                                         Text(
