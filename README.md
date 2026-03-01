@@ -4,7 +4,7 @@ FreeLaneLab is an Android App that makes building roads in Freeways easier than 
 ## Download
 Get the latest Version: <a href="https://github.com/alex29403/FreeLaneLab/releases/latest">Releases</a>
 
-<img src="https://www.alexin.de/projects/freelanelabs/github/showreel1.png" width="400">
+<img width="400" src="https://github.com/user-attachments/assets/69cfd3d5-d9cd-4e0c-9586-945316174c79" />
 
 ### Features
 * Uses SystemAlertWindow to display an easy to use Overlay on top of other apps
