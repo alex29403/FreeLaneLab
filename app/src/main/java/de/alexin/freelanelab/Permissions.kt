@@ -76,9 +76,9 @@ fun Permissions(context: Context, notificationsEnabled: Boolean, overlayEnabled:
                     item {
                         Column {
                             Icon(
-                                modifier = Modifier.size(60.dp).align(Alignment.CenterHorizontally),
+                                modifier = Modifier.size(70.dp).align(Alignment.CenterHorizontally),
                                 painter = painterResource(id = R.drawable.ic_agree),
-                                tint = Color.Gray,
+                                tint = Color(0xFF9CC7FF),
                                 contentDescription = null,
                             )
                             Spacer(modifier = Modifier.height(20.dp))
@@ -282,9 +282,9 @@ fun Permissions(context: Context, notificationsEnabled: Boolean, overlayEnabled:
                     item {
                         Column {
                             Icon(
-                                modifier = Modifier.size(60.dp).align(Alignment.CenterHorizontally),
+                                modifier = Modifier.size(70.dp).align(Alignment.CenterHorizontally),
                                 painter = painterResource(id = R.drawable.ic_warning),
-                                tint = Color.Gray,
+                                tint = Color(0xFFFF8480),
                                 contentDescription = null,
                             )
                             Spacer(modifier = Modifier.height(20.dp))

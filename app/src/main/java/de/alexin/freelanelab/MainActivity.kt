@@ -18,11 +18,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -72,9 +76,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
+        window.setNavigationBarContrastEnforced(false)
+
         setContent {
-            val context = applicationContext
+            val context = LocalContext.current
 
             overlayGranted.value = hasOverlayPermission(context)
             notificationsGranted.value = hasNotificationPermission(context)
@@ -123,12 +130,13 @@ class MainActivity : ComponentActivity() {
                         ModalBottomSheet(
                             sheetState = infoSheetState,
                             onDismissRequest = { isInfoSheetOpen = false },
-                            modifier = Modifier.safeDrawingPadding()
+                            contentWindowInsets = { WindowInsets(0) },
+                            modifier = Modifier.statusBarsPadding()
                         ) {
                             LazyColumn(
                                 modifier = Modifier
                                     .fillMaxWidth(),
-                                contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 34.dp)
+                                contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 30.dp + WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding())
                             ) {
                                 item {
                                     Text(
@@ -149,7 +157,8 @@ class MainActivity : ComponentActivity() {
                                             .clickable {
                                                 val intent =
                                                     Intent(Intent.ACTION_SENDTO).apply {
-                                                        data = "mailto:support@alexin.de".toUri()
+                                                        data =
+                                                            "mailto:support@alexin.de".toUri()
                                                     }
                                                 context.startActivity(intent)
                                             }
@@ -194,7 +203,7 @@ class MainActivity : ComponentActivity() {
                                     )
                                     Spacer(modifier = Modifier.height(0.dp))
                                     Text(
-                                        text = "29.01.2025",
+                                        text = "01.03.2026",
                                         style = typography.bodySmall,
                                         color = colorScheme.tertiary
                                     )
